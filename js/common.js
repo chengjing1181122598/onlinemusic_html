@@ -1,0 +1,1 @@
+var app_root = "http://localhost:8080/onlinemusic";

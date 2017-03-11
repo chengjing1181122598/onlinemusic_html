@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+	</head>
+
+	<body>
+		<div style="text-align: center;">
+			<form method="post" enctype="multipart/form-data" id="uploadForm">
+				<p>
+					<label>选择mp3文件</label>
+					<input type="file" name="audio" required="" accept=".mp3" />
+					<input type="hidden" name="songName" value="一生中最爱" />
+					<input type="hidden" name="lyric" value="如果痴痴的的等某日" />
+					<input type="hidden" name="singerId" value="cdeb16c2-059f-11e7-8a6b-089e01b9991f" />
+					<!--<input type="hidden" name="singerId" value="b289135e-059b-11e7-8a6b-089e01b9991f" />-->
+				</p>
+				<p><button type="button" onclick="saveOrUpdate();">添加歌曲</button></p>
+				<p><button type="button" onclick="deleteByID();">删除艺人</button></p>
+				<p><button type="button" onclick="getById();">获得艺人信息</button></p>
+			</form>
+		</div>
+		<script type="text/javascript">
+			function getById() {
+				$.ajax({
+					url: app_root + "/song/getById",
+					type: "post",
+					data: {
+						primaryKey: "eacf792d-05a0-11e7-8a6b-089e01b9991f"
+					},
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+
+			function saveOrUpdate() {
+				$.ajax({
+					url: app_root + "/song/saveOrUpdate",
+					type: 'POST',
+					cache: false,
+					data: new FormData($('#uploadForm')[0]),
+					processData: false,
+					contentType: false,
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+		</script>
+	</body>
+
+</html>

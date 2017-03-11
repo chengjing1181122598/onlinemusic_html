@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+	</head>
+
+	<body>
+		<div style="text-align: center;">
+			<p><button type="button" onclick="login();">登录</button></p>
+			<p><button type="button" onclick="collectSinger();">收藏艺人</button></p>
+			<p><button type="button" onclick="getPageData();">获得收藏艺人列表</button></p>
+			<p><button type="button" onclick="isCollected();">判断艺人是否被收藏</button></p>
+			<p><button type="button" onclick="deleteById();">删除收藏艺人</button></p>
+		</div>
+		<script type="text/javascript">
+			function deleteById() {
+				$.ajax({
+					url: app_root + "/collectSinger/deleteById",
+					type: "post",
+					data: {
+						primaryKey: "e6217a17-05ff-11e7-88f4-089e01b9991f"
+					},
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+
+			function isCollected() {
+				$.ajax({
+					url: app_root + "/collectSinger/isCollected",
+					type: "post",
+					data: {
+						singerId: "cdeb16c2-059f-11e7-8a6b-089e01b9991f"
+					},
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+
+			function getPageData() {
+				$.ajax({
+					url: app_root + "/collectSinger/getPageData",
+					type: "post",
+					data: {
+						condition_EQ_S_collectUsername: "程景"
+					},
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+
+			function login() {
+				$.ajax({
+					url: app_root + "/user/login",
+					type: "post",
+					data: {
+						username: "程景",
+						password: "123456789"
+					},
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+
+			function collectSinger() {
+				$.ajax({
+					url: app_root + "/collectSinger/save",
+					type: "post",
+					data: {
+						collectSingerId: "cdeb16c2-059f-11e7-8a6b-089e01b9991f"
+					},
+					success: function(data) {
+						console.info(JSON.stringify(data));
+					},
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					dataType: "json"
+				});
+			}
+		</script>
+	</body>
+
+</html>
